@@ -1,0 +1,17 @@
+[
+	{
+		"Name": "cmdlog",
+		"Description":
+			"Run a command and see the results, all without leaving your editor",
+		"Tags": ["log", "logging", "commands", "viewer"],
+		"Versions": [
+			{
+				"Version": "1.0.0",
+				"Url": "https://github.com/sum01/cmdlog-micro/archive/v1.0.0.zip",
+				"Require": {
+					"micro": ">=1.3.5"
+				}
+			}
+		]
+	}
+]
