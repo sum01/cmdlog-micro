@@ -7,7 +7,7 @@ Any output is printed to a new (hsplit) view inside the editor.
 
 **Micro version >= 1.3.5 is required**
 
-1. Add `https://raw.githubusercontent.com/sum01/cmdlog-micro/pre_release/repo.json` to your `pluginrepos`, like so...
+1. Add `https://raw.githubusercontent.com/sum01/cmdlog-micro/master/repo.json` to your `pluginrepos`, like so...
 
 ```json
   "pluginrepos": [
