@@ -3,7 +3,16 @@
 		"Name": "cmdlog",
 		"Description":
 			"Run a command and see the results, all without leaving your editor",
-		"Tags": ["log", "logging", "commands", "viewer"],
+		"Tags": [
+			"log",
+			"logging",
+			"command",
+			"commands",
+			"terminal",
+			"shell",
+			"viewer",
+			"pane"
+		],
 		"Versions": [
 			{
 				"Version": "1.0.0",

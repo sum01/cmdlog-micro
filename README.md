@@ -1,7 +1,9 @@
 # cmdlog-micro
 
-This plugin for the [Micro text-editor](https://github.com/zyedidia/micro) lets you run terminal/shell/program commmands (with/without args) without leaving your editor.  
-Any output is printed to a new (hsplit) view inside the editor.
+This is a plugin for the [Micro text-editor](https://github.com/zyedidia/micro).  
+It lets you run terminal commmands without leaving your editor, printing output to a view inside the editor.
+
+PS: This plugin is OS-agnostic, and the Unix-specific things are merely for example.
 
 ## Installation
 
@@ -26,10 +28,10 @@ But you don't have to quote a single command that has no args. So `runit ls` is 
 
 ### Keybinding
 
-In your `bindings.json`, put `"Alt-l": "cmdlog.prompt_runit"` (replacing `Alt-l` with desired keybind).  
+Put `"Alt-l": "cmdlog.prompt_runit"` (replace `Alt-l` with desired keybind) in your `bindings.json`.  
 This has the side-effect of not requiring to have to quote things, since the prompt will auto-quote your input.
 
-### Chaning Commands
+### Chaining Commands
 
 Use the semi-colon `;` to chain commands, like so...  
 `runit "ls -l;git --version"`
