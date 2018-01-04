@@ -1,21 +1,38 @@
 VERSION = "1.0.0"
 
+-- A true/false option for displaying as a vsplit instead of hsplit
+if GetOption("cmdlog-vertical") == nil then
+	-- default to horizontal
+	AddOption("cmdlog-vertical", false)
+end
+
 local log_view = nil
 local cmd_list = {}
 
 -- Opens an empty hsplit and sets its settings
 local function new_view()
-	-- Open an empty hsplit view
-	CurView():HSplit(NewBuffer("", "cmdlog"))
-	-- Save the view to track it
-	log_view = CurView()
-	-- Keep the height to 15%
-	log_view.Height = 10
-	-- Don't let it be changed
-	log_view.LockHeight = true
+	-- Open an empty view horizontally/vertically
+	if GetOption("cmdlog-vertical") then
+		CurView():VSplit(NewBuffer("", "cmdlog"))
+		-- Save the view to track it
+		log_view = CurView()
+		-- Keep the width to 30% (lower than this is kind of hard to read)
+		log_view.Width = 30
+		-- Don't let it be changed
+		log_view.LockWidth = true
+	else
+		CurView():HSplit(NewBuffer("", "cmdlog"))
+		-- Save the view to track it
+		log_view = CurView()
+		-- Keep the height to 10%
+		log_view.Height = 10
+		-- Don't let it be changed
+		log_view.LockHeight = true
+	end
+
 	SetLocalOption("softwrap", "true", log_view)
-	-- No line numbering
-	SetLocalOption("ruler", "false", log_view)
+	-- Line numbering
+	SetLocalOption("ruler", "true", log_view)
 	-- Is this needed with new non-savable settings from being "vtLog"?
 	SetLocalOption("autosave", "false", log_view)
 	-- Don't show the statusline to differentiate the view from normal views
@@ -126,8 +143,10 @@ function runit(input)
 	if log_view == nil then
 		new_view()
 	else
-		-- Create a line-break between old command before printing new stuff
-		log_it("")
+		-- Create a visual separator between command "chunks" (when `runit` is run)
+		log_it("~~~~~~~~~~~~\n")
+		-- Move the cursor to the bottom before inserting the command results
+		log_view.Buf.Cursor:DownN(log_view.Buf:LinesNum() - 1 - log_view.Buf.Cursor.Loc.Y)
 	end
 
 	-- Clear the command list before inserting anything
@@ -157,3 +176,4 @@ function prompt_runit()
 end
 
 MakeCommand("runit", "cmdlog.runit", 0)
+AddRuntimeFile("cmdlog", "help", "help/cmdlog.md")
